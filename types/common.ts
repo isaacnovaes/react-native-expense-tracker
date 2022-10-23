@@ -5,4 +5,6 @@ export interface Expense {
     id: string;
 }
 
+export type ExpenseWithoutID = Omit<Expense, 'id'>;
+
 export type ExpensesPeriod = 'Total' | 'Recent';

@@ -1,122 +1,29 @@
 import { useMemo, createContext, useReducer } from 'react';
-import type { Expense } from '../types/common';
+import type { Expense, ExpenseWithoutID } from '../types/common';
 
 type ActionType =
-    | { type: 'ADD_EXPENSE'; newExpenseData: Omit<Expense, 'id'> }
+    | { type: 'ADD_EXPENSE'; newExpenseData: Expense }
     | { type: 'REMOVE_EXPENSE'; expenseID: string }
     | {
           type: 'UPDATE_EXPENSE';
           expenseToUpdateID: string;
-          newExpenseData: Omit<Expense, 'id'>;
-      };
+          newExpenseData: ExpenseWithoutID;
+      }
+    | { type: 'FETCH_EXPENSES'; expenses: Expense[] };
 
 type StateType = {
     expenses: Expense[];
 };
 
 const initialState: StateType = {
-    expenses: [
-        {
-            id: 'first',
-            amount: 300,
-            description: 'A pair of shoes',
-            date: new Date('2021-11-18'),
-        },
-        {
-            id: 'second',
-            amount: 30.95,
-            description: 'A pair of trousers',
-            date: new Date('2022-09-15'),
-        },
-        {
-            id: 'third',
-            amount: 3.98,
-            description: 'Some bananas',
-            date: new Date('2022-11-13'),
-        },
-        {
-            id: 'fourth',
-            amount: 85.47,
-            description: 'A book',
-            date: new Date('2022-11-18'),
-        },
-        {
-            id: 'fifth',
-            amount: 85.47,
-            description: 'A backpack',
-            date: new Date('2020-11-17'),
-        },
-        {
-            id: 'd1',
-            amount: 300,
-            description: 'A pair of shoes',
-            date: new Date('2022-11-18'),
-        },
-        {
-            id: 'd2',
-            amount: 30.95,
-            description: 'A pair of trousers',
-            date: new Date('2022-11-15'),
-        },
-        {
-            id: 'd3',
-            amount: 3.98,
-            description: 'Some bananas',
-            date: new Date('2022-11-13'),
-        },
-        {
-            id: 'd4',
-            amount: 85.47,
-            description: 'A book',
-            date: new Date('2022-07-18'),
-        },
-        {
-            id: 'd6',
-            amount: 85.47,
-            description: 'A backpack',
-            date: new Date('2022-11-17'),
-        },
-        {
-            id: 'd7',
-            amount: 300,
-            description: 'A pair of shoes',
-            date: new Date('2022-11-18'),
-        },
-        {
-            id: 'd8',
-            amount: 30.95,
-            description: 'A pair of trousers',
-            date: new Date('2022-05-15'),
-        },
-        {
-            id: 'sf',
-            amount: 3.98,
-            description: 'Some bananas',
-            date: new Date('2022-11-13'),
-        },
-        {
-            id: 'fwegweg',
-            amount: 85.47,
-            description: 'A book',
-            date: new Date('2022-11-18'),
-        },
-        {
-            id: 'xvsvwe',
-            amount: 85.47,
-            description: 'A backpack',
-            date: new Date('2020-11-17'),
-        },
-    ],
+    expenses: [],
 };
 
 const reducer = (state: StateType, action: ActionType): StateType => {
     switch (action.type) {
         case 'ADD_EXPENSE': {
             return {
-                expenses: [
-                    ...state.expenses,
-                    { ...action.newExpenseData, id: Math.random().toString() },
-                ],
+                expenses: [action.newExpenseData, ...state.expenses],
             };
         }
         case 'REMOVE_EXPENSE': {
@@ -132,6 +39,11 @@ const reducer = (state: StateType, action: ActionType): StateType => {
                     if (expense.id !== action.expenseToUpdateID) return expense;
                     return { ...expense, ...action.newExpenseData };
                 }),
+            };
+        }
+        case 'FETCH_EXPENSES': {
+            return {
+                expenses: action.expenses.reverse(), // firebase stores items chronologically, so reverse it so new items are the fist ones
             };
         }
         default:

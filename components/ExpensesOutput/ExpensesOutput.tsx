@@ -2,10 +2,13 @@ import { View, StyleSheet, Text } from 'react-native';
 import ExpensesSummary from './ExpensesSummary';
 import ExpensesList from './ExpensesList';
 import { colors } from '../../colors/globalColors';
-import { useContext } from 'react';
-import { Context } from '../../context/ContextProvider';
+import { useContext, useEffect, useState } from 'react';
 import { getDateMinusDays } from '../../utils/date';
 import type { ExpensesPeriod } from '../../types/common';
+import { fetchExpenses } from '../../utils/http';
+import { Context } from '../../context/ContextProvider';
+import LoadingOverlay from '../UI/LoadingOverlay';
+import ErrorOverlay from '../UI/ErrorOverlay';
 
 interface ExpensesOutputProps {
     expensesPeriod: ExpensesPeriod;
@@ -29,8 +32,41 @@ const styles = StyleSheet.create({
 
 const ExpensesOutput = (props: ExpensesOutputProps) => {
     const {
+        dispatch,
         state: { expenses },
     } = useContext(Context);
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        const handleResponse = async () => {
+            setLoading(true);
+            try {
+                const response = await fetchExpenses();
+                dispatch({ type: 'FETCH_EXPENSES', expenses: response });
+                setError(false);
+            } catch (e) {
+                setError(true);
+            }
+            setLoading(false);
+        };
+        void handleResponse();
+    }, [dispatch]);
+
+    if (loading) {
+        return <LoadingOverlay />;
+    }
+    if (error) {
+        return (
+            <ErrorOverlay
+                message='Error while taking your expenses'
+                onPress={() => {
+                    setError(false);
+                }}
+            />
+        );
+    }
 
     const today = new Date();
     const recentExpenses = expenses.filter((expense) => {

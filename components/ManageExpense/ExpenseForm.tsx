@@ -91,11 +91,10 @@ const ExpenseForm = (props: ExpenseFormProps) => {
                         placeholder='Enter amount'
                         keyboardType='decimal-pad'
                         onChangeText={(text) => {
-                            if (text)
-                                setInputValues((state) => ({
-                                    ...state,
-                                    amount: text,
-                                }));
+                            setInputValues((state) => ({
+                                ...state,
+                                amount: text,
+                            }));
                         }}
                         returnKeyType='done'
                         value={inputValues.amount}
@@ -108,11 +107,10 @@ const ExpenseForm = (props: ExpenseFormProps) => {
                         placeholder='YYYY-MM-DD'
                         maxLength={10}
                         onChangeText={(text) => {
-                            if (text)
-                                setInputValues((state) => ({
-                                    ...state,
-                                    date: text,
-                                }));
+                            setInputValues((state) => ({
+                                ...state,
+                                date: text,
+                            }));
                         }}
                         returnKeyType='done'
                         value={inputValues.date}
@@ -125,11 +123,10 @@ const ExpenseForm = (props: ExpenseFormProps) => {
                     style={[styles.input, styles.inputMultiline]}
                     placeholder='Enter description'
                     onChangeText={(text) => {
-                        if (text)
-                            setInputValues((state) => ({
-                                ...state,
-                                description: text,
-                            }));
+                        setInputValues((state) => ({
+                            ...state,
+                            description: text,
+                        }));
                     }}
                     multiline
                     textAlignVertical='top'

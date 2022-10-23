@@ -1,13 +1,13 @@
 import { View, StyleSheet, Alert } from 'react-native';
 import IconButton from '../components/UI/IconButton';
 import { Ionicons } from '@expo/vector-icons';
-import type { StackScreenManageExpenseProps } from '../types/navigation';
+import { StackScreenManageExpenseProps } from '../types/navigation';
 import { colors } from '../colors/globalColors';
 import { useContext, useState } from 'react';
 import { Context } from '../context/ContextProvider';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import { deleteExpense, storeExpense, updateExpense } from '../utils/http';
-import type { Expense } from '../types/common';
+import { Expense } from '../types/common';
 import LoadingOverlay from '../components/UI/LoadingOverlay';
 import ErrorOverlay from '../components/UI/ErrorOverlay';
 

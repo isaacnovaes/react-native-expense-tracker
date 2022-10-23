@@ -1,12 +1,24 @@
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { CompositeScreenProps } from '@react-navigation/native';
-import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 // Native Stack
 export type StackScreens = {
-    ManageExpense: { expenseID?: string; mode: 'ADD' | 'UPDATE' };
+    Login: undefined;
+    SignUp: undefined;
     BottomTabs: undefined;
+    ManageExpense: { expenseID?: string; mode: 'ADD' | 'UPDATE' };
 };
+
+export type StackScreenLoginProps = NativeStackScreenProps<
+    StackScreens,
+    'Login'
+>;
+
+export type StackScreenSignUpProps = NativeStackScreenProps<
+    StackScreens,
+    'SignUp'
+>;
 
 // Only a Screens Container
 export type StackScreenBottomTabsProps = NativeStackScreenProps<
@@ -23,6 +35,7 @@ export type StackScreenManageExpenseProps = NativeStackScreenProps<
 export type BottomTabsScreens = {
     RecentExpenses: undefined;
     AllExpenses: undefined;
+    Logout: undefined;
 };
 
 export type BottomTabRecentExpensesProps = CompositeScreenProps<
@@ -37,3 +50,8 @@ export type BottomTabAllExpensesProps = CompositeScreenProps<
 
 export type BottomTabAllExpensesItemListNavHook =
     BottomTabAllExpensesProps['navigation'];
+
+export type BottomTabLogOutProps = CompositeScreenProps<
+    BottomTabScreenProps<BottomTabsScreens, 'Logout'>,
+    NativeStackScreenProps<StackScreens>
+>;

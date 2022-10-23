@@ -1,6 +1,11 @@
-import type { ViewStyle, StyleProp } from 'react-native';
-// eslint-disable-next-line no-duplicate-imports
-import { Pressable, StyleSheet, View, Text } from 'react-native';
+import {
+    ViewStyle,
+    StyleProp,
+    Pressable,
+    StyleSheet,
+    View,
+    Text,
+} from 'react-native';
 import { colors } from '../../colors/globalColors';
 
 const styles = StyleSheet.create({

@@ -4,7 +4,7 @@ import ExpensesList from './ExpensesList';
 import { colors } from '../../colors/globalColors';
 import { useContext, useEffect, useState } from 'react';
 import { getDateMinusDays } from '../../utils/date';
-import type { ExpensesPeriod } from '../../types/common';
+import { ExpensesPeriod } from '../../types/common';
 import { fetchExpenses } from '../../utils/http';
 import { Context } from '../../context/ContextProvider';
 import LoadingOverlay from '../UI/LoadingOverlay';

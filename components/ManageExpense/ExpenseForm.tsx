@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextInput, View, StyleSheet, Text, Alert } from 'react-native';
 import { colors } from '../../colors/globalColors';
-import type { Expense } from '../../types/common';
+import { Expense } from '../../types/common';
 import { getFormattedDate } from '../../utils/date';
 import Button from '../UI/Button';
 
@@ -96,7 +96,7 @@ const ExpenseForm = (props: ExpenseFormProps) => {
                                 amount: text,
                             }));
                         }}
-                        returnKeyType='done'
+                        returnKeyType='next'
                         value={inputValues.amount}
                     />
                 </View>
@@ -112,7 +112,7 @@ const ExpenseForm = (props: ExpenseFormProps) => {
                                 date: text,
                             }));
                         }}
-                        returnKeyType='done'
+                        returnKeyType='next'
                         value={inputValues.date}
                     />
                 </View>
@@ -130,6 +130,7 @@ const ExpenseForm = (props: ExpenseFormProps) => {
                     }}
                     multiline
                     textAlignVertical='top'
+                    returnKeyType='done'
                     value={inputValues.description}
                 />
             </View>

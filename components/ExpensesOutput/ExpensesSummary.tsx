@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { colors } from '../../colors/globalColors';
-import type { Expense, ExpensesPeriod } from '../../types/common';
+import { Expense, ExpensesPeriod } from '../../types/common';
 
 interface ExpenseSummaryProps {
     expenses: Expense[];

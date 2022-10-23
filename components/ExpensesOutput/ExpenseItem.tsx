@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
 import { colors } from '../../colors/globalColors';
-import type { Expense } from '../../types/common';
-import type { BottomTabAllExpensesItemListNavHook } from '../../types/navigation';
+import { Expense } from '../../types/common';
+import { BottomTabAllExpensesItemListNavHook } from '../../types/navigation';
 import { getFormattedDate } from '../../utils/date';
 
 const styles = StyleSheet.create({

@@ -48,8 +48,8 @@ module.exports = {
         'prefer-const': 'warn',
         yoda: 'error',
         '@typescript-eslint/consistent-type-definitions': 'off',
-        '@typescript-eslint/consistent-type-exports': 'warn',
-        '@typescript-eslint/consistent-type-imports': 'warn',
+        '@typescript-eslint/consistent-type-exports': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
         '@typescript-eslint/method-signature-style': 'warn',
         '@typescript-eslint/naming-convention': [
             'warn',
